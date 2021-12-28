@@ -8,11 +8,11 @@ driver = webdriver.Chrome(ChromeDriverManager().install())
 driver.implicitly_wait(30)
 url = "https://www.tripadvisor.com/Attractions-g261670-Activities-Wodonga_Victoria.html" #You can replace your url here.
 driver.get(url)
-#print(driver.page_source)
+
 
 
 bsobj = BeautifulSoup(driver.page_source, 'html.parser')
-print("hahaha")
+print("strat")
 
 links=[]
 location_names=[]
@@ -33,7 +33,6 @@ reviews_list = []
 reviews_location=[]
 count=0
 for link in links:
-    d = [5,10,15,20,25]
     location=location_names[count]
     count=count+1
     flag=0
@@ -60,4 +59,4 @@ for link in links:
             #sleep(1)
             #print(reviews_list)
         dataframe = pd.DataFrame({'location':reviews_location,'content':reviews_list})
-        dataframe.to_csv("tripadvisor_reviews_Wodonga.csv",index=True)
+        dataframe.to_csv("tripadvisor_reviews_Wodonga.csv",index=True)#saving to the csv, you can change the name
