@@ -9,7 +9,7 @@ driver.implicitly_wait(30)
 url = "https://www.tripadvisor.com/Attractions-g255314-Activities-oa*-place_state.html" 
 place="Albury" #You can replace your place here.
 state="New_South_Wales"       #You can replace your state here.
-targe_number=50    #the number of reviews of each loaction you want to collect.
+target_number=50   #the number of reviews of each loaction you want to collect.
 url = url.replace("place",place)
 url = url.replace("state",state)
 links=[]
@@ -60,7 +60,7 @@ for link in links:
             break
         print(target_link)
         for r in reviews_div:
-            if r.span is None or collected_number>=targe_number:
+            if r.span is None or collected_number>=target_number:
                 flag=1
                 break
             reviews_list.append(str(r.span.text.strip()))
