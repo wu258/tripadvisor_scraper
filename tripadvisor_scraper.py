@@ -9,10 +9,12 @@ driver.implicitly_wait(30)
 url = "https://www.tripadvisor.com/Attractions-g255314-Activities-oa*-place_state.html" 
 place="Albury" #You can replace your place here.
 state="New_South_Wales"       #You can replace your state here.
+targe_number=50    #the number of reviews of each loaction you want to collect.
 url = url.replace("place",place)
 url = url.replace("state",state)
 links=[]
 location_names=[]
+
 for i in range(0,1000,30):
     target_url=url.replace("*",str(i))
     driver.get(target_url)
@@ -37,11 +39,13 @@ for i in range(0,1000,30):
 reviews_list = []
 reviews_location=[]
 count=0
+
 for link in links:
     location=location_names[count]
     count=count+1
     flag=0
-    for i in range(5,1000,5):
+    collected_number=0
+    for i in range(0,1000,5):
         target_link=link.format(i)
         print(target_link)
         html2 = driver.get(target_link)
@@ -56,11 +60,12 @@ for link in links:
             break
         print(target_link)
         for r in reviews_div:
-            if r.span is None:
+            if r.span is None or collected_number>=targe_number:
                 flag=1
                 break
             reviews_list.append(str(r.span.text.strip()))
             reviews_location.append(location)
+            collected_number=collected_number+1
             #sleep(1)
             #print(reviews_list)
         dataframe = pd.DataFrame({'location':reviews_location,'content':reviews_list})
