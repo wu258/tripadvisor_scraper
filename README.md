@@ -2,8 +2,7 @@
 
 It will collect all of the reviews from the attractions on TripAdvisor
 
-you only need to change the name of place and state at the beginning of this code
-
+you only need to change the name of place and state at the beginning of this code, the target_number at line 12 is the maximum number of reviews will be collected for each attractions 
 
 ## Environment
 
